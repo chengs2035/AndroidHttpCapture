@@ -91,12 +91,14 @@ import cn.darkal.networkdiagnosis.View.LoadingDialog;
 /**
  * Created by xuzhou on 2016/8/10.
  * MainActivity
+ * Modify chengs2035 20200913 去掉开屏的自动访问网站的功能
  */
 public class MainActivity extends AppCompatActivity implements BackHandledInterface {
     public final static String CODE_URL = "#";
     public final static String UPLOAD_URL = "#";
-    public final static String HOME_URL = "http://h5.darkal.cn/har/guide/widget.basic2.html";
-    public final static String GUIDE_URL = "http://h5.darkal.cn/har/guide/widget.guide2.html";
+    //去掉开屏的自动访问 20200913
+    public final static String HOME_URL = "";
+    public final static String GUIDE_URL = "";
 
     public final static int TYPE_NONE = 0;
     public final static int TYPE_SHARE = 1;
@@ -389,13 +391,15 @@ public class MainActivity extends AppCompatActivity implements BackHandledInterf
 
         if (id == R.id.action_home) {
             WebViewFragment webViewFragment = WebViewFragment.getInstance();
-            webViewFragment.loadUrl(HOME_URL);
+            //去掉开屏的自动访问 20200913
+            // webViewFragment.loadUrl(HOME_URL);
             switchContent(webViewFragment);
             return true;
         }
         if (id == R.id.action_guide) {
             WebViewFragment webViewFragment = WebViewFragment.getInstance();
-            webViewFragment.loadUrl(GUIDE_URL);
+            //去掉开屏的自动访问 20200913
+            //webViewFragment.loadUrl(GUIDE_URL);
             switchContent(webViewFragment);
             return true;
         }
