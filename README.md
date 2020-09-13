@@ -6,6 +6,16 @@
 
 ### [点击查看操作手册](http://h5.darkal.cn/har/guide/widget.guide.html)<br><br>
 
+### 编译说明
+如果编译过程出现乱码的提示，参考这里修改[编译错误修改](https://blog.csdn.net/weixin_37826412/article/details/105555837)
+这里摘抄对应步骤过来：
+1. 在AS界面双击shift键，弹出如下图，在输入框中输入：Edit Custom VM Options回车查找。
+2. 显示这个文件不存在，点击create创建即可。
+3. 在文件中添加：-Dfile.encoding=UTF-8，设置编码。
+4. 点击Sync Gradle按钮：
+5. 同步完成后重启，问题解决。
+
+
 
 ### 功能简介
 1． HTTP/HTTPS抓包<br>
