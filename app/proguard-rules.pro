@@ -81,9 +81,7 @@
 }
 
 
-# Bugly
--dontwarn com.tencent.bugly.**
--keep class com.tencent.bugly.** {*;}
+
 
 # ButterKnife
 -keep class butterknife.** { *; }

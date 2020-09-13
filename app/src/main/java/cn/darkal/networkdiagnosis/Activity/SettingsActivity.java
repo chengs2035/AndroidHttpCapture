@@ -16,7 +16,7 @@ import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.tencent.bugly.beta.Beta;
+
 
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.proxy.dns.AdvancedHostResolver;
@@ -42,6 +42,10 @@ import cn.darkal.networkdiagnosis.View.LoadingDialog;
  * Android Design: Settings</a> for design guidelines and the <a
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
+ */
+
+/**
+ *   modify chengs2035 20200913 去掉BUGLY
  */
 public class SettingsActivity extends AbstractAppCompatPreferenceActivity implements Preference.OnPreferenceChangeListener {
 
@@ -96,7 +100,7 @@ public class SettingsActivity extends AbstractAppCompatPreferenceActivity implem
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 try {
-                    Beta.checkUpgrade();
+                    //Beta.checkUpgrade();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -49,7 +49,7 @@ import com.bumptech.glide.Glide;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.zxing.QrCodeScanActivity;
-import com.tencent.bugly.crashreport.CrashReport;
+
 
 import net.gotev.uploadservice.ServerResponse;
 import net.gotev.uploadservice.UploadInfo;
@@ -92,6 +92,7 @@ import cn.darkal.networkdiagnosis.View.LoadingDialog;
  * Created by xuzhou on 2016/8/10.
  * MainActivity
  * Modify chengs2035 20200913 去掉开屏的自动访问网站的功能
+ * modify chengs2035 20200913 去掉BUGLY
  */
 public class MainActivity extends AppCompatActivity implements BackHandledInterface {
     public final static String CODE_URL = "#";
@@ -651,7 +652,7 @@ public class MainActivity extends AppCompatActivity implements BackHandledInterf
                                     Snackbar.make(rootView, "HAR文件保存失败", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                                 }
                             });
-                            CrashReport.postCatchedException(e);
+                            //CrashReport.postCatchedException(e);
                             e.printStackTrace();
                         } finally {
                             dismissLoading();
@@ -1067,7 +1068,7 @@ public class MainActivity extends AppCompatActivity implements BackHandledInterf
             dismissLoading();
             Snackbar.make(rootView, "上传失败！", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             exception.printStackTrace();
-            CrashReport.postCatchedException(exception);
+            //CrashReport.postCatchedException(exception);
         }
 
         @Override
