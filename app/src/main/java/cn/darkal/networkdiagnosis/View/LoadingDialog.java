@@ -15,6 +15,7 @@ import cn.darkal.networkdiagnosis.R;
 
 /**
  * Created by zhongshengkun on 2015/4/23.
+ * modify chengs2035 20200913 去掉BUGLY
  */
 public class LoadingDialog extends ProgressDialog {
 

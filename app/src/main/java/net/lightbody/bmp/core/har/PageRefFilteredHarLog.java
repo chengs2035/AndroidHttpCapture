@@ -16,7 +16,7 @@ public class PageRefFilteredHarLog extends HarLog {
         super();
         setBrowser(log.getBrowser());
         setPages(getFilteredPages(log.getPages(), pageRef));
-        setEntries(getFilteredEntries(log.getEntries(), pageRef));
+        setEntries(getFilteredEntries(log.getHLSGEntries(), pageRef));
         setComment(log.getComment());
     }
 
@@ -24,7 +24,7 @@ public class PageRefFilteredHarLog extends HarLog {
         super();
         setBrowser(log.getBrowser());
         setPages(getFilteredPages(log.getPages(), pageRef));
-        setEntries(getFilteredEntries(log.getEntries(), pageRef));
+        setEntries(getFilteredEntries(log.getHLSGEntries(), pageRef));
         setComment(log.getComment());
     }
 

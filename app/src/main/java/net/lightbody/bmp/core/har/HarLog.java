@@ -100,6 +100,28 @@ public class HarLog {
         return entries;
     }
 
+    /**
+     * 只包含HLSG的报文
+     * @return
+     */
+    public List<HarEntry> getHLSGEntries(){
+        List<HarEntry> tempHarEntrys=new CopyOnWriteArrayList<HarEntry>();
+
+        // list.get(0).getRequest().getUrl()
+        if(entries!=null && entries.size()>0){
+            int harSize=entries.size();
+            for(int i=0;i<harSize;i++){
+                HarEntry he=entries.get(i);
+                //如果不是hlsg的报文，就直接去掉不需要显示了。
+                String heUrl=he.getRequest().getUrl();
+
+                if(heUrl.contains("https://sq-hlsg.tytuyoo.com/open/v6/user/LoginBySnsIdNoVerify")){
+                    tempHarEntrys.add(entries.get(i));
+                }
+            }
+        }
+        return tempHarEntrys;
+    }
     public void setEntries(List<HarEntry> entries) {
         this.entries = entries;
     }

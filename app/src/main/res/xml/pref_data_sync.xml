@@ -3,20 +3,9 @@
     <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
          dismiss it. -->
     <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
-    <ListPreference
-        android:defaultValue="0"
-        android:entries="@array/pref_item_UA"
-        android:entryValues="@array/pref_item_UA_values"
-        android:key="select_ua"
-        android:negativeButtonText="@null"
-        android:positiveButtonText="@null"
-        android:title="@string/pref_title_UA" />
 
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="enable_filter"
-        android:summary="Beta：启用该功能小概率会造成HTTPS请求返回不稳定的情况，修改该选项需要重启应用后生效"
-        android:title="启用返回包注入" />
+
+
 
 
     <EditTextPreference

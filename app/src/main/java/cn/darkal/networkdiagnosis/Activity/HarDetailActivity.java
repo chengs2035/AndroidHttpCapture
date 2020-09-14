@@ -52,7 +52,7 @@ public class HarDetailActivity extends AppCompatActivity {
 
     public void initHarLog(int pos) {
         HarLog harLog = ((SysApplication) getApplication()).proxy.getHar().getLog();
-        HarEntry harEntry = harLog.getEntries().get(pos);
+        HarEntry harEntry = harLog.getHLSGEntries().get(pos);
 
         HarRequest harRequest = harEntry.getRequest();
         HarResponse harResponse = harEntry.getResponse();

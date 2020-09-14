@@ -57,7 +57,9 @@ public class PreviewFragment extends BaseFragment {
 
         if (SysApplication.isInitProxy) {
             harLog = ((SysApplication) getActivity().getApplication()).proxy.getHar().getLog();
-            harEntryList.addAll(harLog.getEntries());
+            //加入过滤。//
+            List<HarEntry> list=harLog.getHLSGEntries();
+            harEntryList.addAll(list);
         }
         recyclerView.addItemDecoration(new RecycleViewDivider(getActivity(), RecycleViewDivider.VERTICAL_LIST));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -69,6 +71,8 @@ public class PreviewFragment extends BaseFragment {
 
         return view;
     }
+
+
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -83,7 +87,7 @@ public class PreviewFragment extends BaseFragment {
         if (previewAdapter != null) {
             harLog = ((MainActivity) getActivity()).getFiltedHar().getLog();
             harEntryList.clear();
-            harEntryList.addAll(harLog.getEntries());
+            harEntryList.addAll(harLog.getHLSGEntries());
             previewAdapter.notifyDataSetChanged();
         }
     }
@@ -154,12 +158,12 @@ public class PreviewFragment extends BaseFragment {
                     //假如搜索为空的时候，将复制的数据添加到原始数据，用于继续过滤操作
                     if (results.values == null) {
                         harEntryList.clear();
-                        harEntryList.addAll(harLog.getEntries());
+                        harEntryList.addAll(harLog.getHLSGEntries());
                     }
                     //关键字为空的时候，搜索结果为复制的结果
                     if (constraint == null || constraint.length() == 0) {
-                        results.values = harLog.getEntries();
-                        results.count = harLog.getEntries().size();
+                        results.values = harLog.getHLSGEntries();
+                        results.count = harLog.getHLSGEntries().size();
                     } else {
                         String prefixString = constraint.toString();
                         final int count = harEntryList.size();
@@ -204,7 +208,7 @@ public class PreviewFragment extends BaseFragment {
                             return;
                         }
                         //加载复制的数据，即为最初的数据
-                        harEntryList.addAll(harLog.getEntries());
+                        harEntryList.addAll(harLog.getHLSGEntries());
                         previewAdapter.notifyDataSetChanged();
                     }
                 }
@@ -237,11 +241,11 @@ public class PreviewFragment extends BaseFragment {
 
         @Override
         public void onClick(View view) {
-            if (harLog.getEntries().indexOf(harEntry) >= 0) {
+            if (harLog.getHLSGEntries().indexOf(harEntry) >= 0) {
                 isHiddenHID = true;
                 Intent intent = new Intent(getContext(), HarDetailActivity.class);
                 intent.putExtra("pos", ((SysApplication) getActivity().getApplication()).proxy.
-                        getHar().getLog().getEntries().indexOf(harEntry));
+                        getHar().getLog().getHLSGEntries().indexOf(harEntry));
                 getActivity().startActivity(intent);
             }
         }

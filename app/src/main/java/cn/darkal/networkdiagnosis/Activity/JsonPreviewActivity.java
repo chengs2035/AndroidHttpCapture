@@ -55,7 +55,7 @@ public class JsonPreviewActivity extends AppCompatActivity {
             int pos = getIntent().getIntExtra("pos", -1);
             if (pos > -1) {
                 HarLog harLog = ((SysApplication) getApplication()).proxy.getHar().getLog();
-                HarEntry harEntry = harLog.getEntries().get(pos);
+                HarEntry harEntry = harLog.getHLSGEntries().get(pos);
                 content = harEntry.getResponse().getContent().getText();
                 initViewDelay(content);
             } else {

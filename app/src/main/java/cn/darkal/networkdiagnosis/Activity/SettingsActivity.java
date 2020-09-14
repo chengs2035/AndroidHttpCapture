@@ -164,7 +164,7 @@ public class SettingsActivity extends AbstractAppCompatPreferenceActivity implem
 
     public void installCert() {
         final String CERTIFICATE_RESOURCE = Environment.getExternalStorageDirectory() + "/har/littleproxy-mitm.pem";
-        Toast.makeText(this, "必须安装证书才可实现HTTPS抓包", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "必须安装证书才可实现HTTPS抓包，如果系统安全策略禁用安装自定义证书，请手动安装，证书文件目录："+CERTIFICATE_RESOURCE, Toast.LENGTH_LONG).show();
 
         Runnable runnable = new Runnable() {
             @Override

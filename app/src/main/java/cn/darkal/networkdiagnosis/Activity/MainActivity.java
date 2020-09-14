@@ -112,8 +112,6 @@ public class MainActivity extends AppCompatActivity implements BackHandledInterf
     public FloatingActionMenu fam;
     @BindView(R.id.fab_share)
     public FloatingActionButton shareFab;
-    @BindView(R.id.fab_upload)
-    public FloatingActionButton uploadFab;
     @BindView(R.id.fab_preview)
     public FloatingActionButton previewFab;
     @BindView(R.id.fab_clear)
@@ -137,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements BackHandledInterf
     private Receiver receiver;
     private LoadingDialog loadingDialog;
     private String[] uaItem = new String[]{"手机浏览器", "微信环境", "手Q环境"};
+
     public NavigationView.OnNavigationItemSelectedListener navigationItemListener = new NavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(MenuItem item) {
@@ -149,14 +148,7 @@ public class MainActivity extends AppCompatActivity implements BackHandledInterf
             }
 
             switch (id) {
-                case R.id.nav_camera: {
-                    Intent intent = new Intent(MainActivity.this, QrCodeScanActivity.class);
-                    startActivity(intent);
-                    break;
-                }
-                case R.id.nav_gallery:
-                    switchContent(WebViewFragment.getInstance());
-                    break;
+
                 case R.id.nav_preview:
                     switchContent(PreviewFragment.getInstance());
                     break;
@@ -168,25 +160,11 @@ public class MainActivity extends AppCompatActivity implements BackHandledInterf
                     startActivity(intent);
                     break;
                 }
-                case R.id.nav_ua:
-                    showUaDialog();
-                    break;
-                case R.id.nav_modify:
-                    if (shp.getBoolean("enable_filter", false)) {
-                        Intent intent = new Intent(MainActivity.this, ChangeFilterActivity.class);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(MainActivity.this, "请前往设置启用注入功能", Toast.LENGTH_LONG).show();
-                    }
-                    break;
                 case R.id.nav_cosole:
                     showLogDialog();
                     break;
                 case R.id.nav_host:
                     showHostDialog();
-                    break;
-                case R.id.nav_page:
-                    createPage();
                     break;
                 default:
                     break;
@@ -205,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements BackHandledInterf
         shp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         setContentView(R.layout.activity_main);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -233,54 +212,13 @@ public class MainActivity extends AppCompatActivity implements BackHandledInterf
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(navigationItemListener);
+
         navigationView.getMenu().getItem(0).setChecked(true);
 
-//        if (savedInstanceState != null && savedInstanceState.getInt("tab") != 0) {
-//            switch (savedInstanceState.getInt("tab")) {
-//                case 1:
-//                    switchContent(WebViewFragment.getInstance());
-//                    break;
-//                case 2:
-//                    switchContent(NetworkFragment.getInstance());
-//                    break;
-//                case 3:
-//                    switchContent(PreviewFragment.getInstance());
-//                    break;
-//            }
-//        }
-
-//        fab.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                //获取到手指处的横坐标和纵坐标
-//                int x = (int) motionEvent.getX();
-//                int y = (int) motionEvent.getY();
-//                switch (motionEvent.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
-//                        lastX = x;
-//                        lastY = y;
-//                        isMove = false;
-//                        break;
-//                    case MotionEvent.ACTION_MOVE:
-//                        //计算移动的距离
-//                        int offX = x - lastX;
-//                        int offY = y - lastY;
-//                        if (offX * offX + offY * offY < 400 && !isMove) {
-//                            break;
-//                        }
-//                        view.offsetLeftAndRight(offX);
-//                        view.offsetTopAndBottom(offY);
-//                        isMove = true;
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        if (!isMove) {
-//                            createPage();
-//                        }
-//                        break;
-//                }
-//                return true;
-//            }
-//        });
+        //切换到报文页面
+        switchContent(PreviewFragment.getInstance());
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
     }
 
     public void createPage() {
@@ -639,7 +577,7 @@ public class MainActivity extends AppCompatActivity implements BackHandledInterf
                                 @Override
                                 public void run() {
                                     Snackbar.make(rootView, "HAR文件已保存至" + saveHarFile.getPath() + " 共计："
-                                            + har.getLog().getEntries().size() + "个请求", Snackbar.LENGTH_LONG)
+                                            + har.getLog().getHLSGEntries().size() + "个请求", Snackbar.LENGTH_LONG)
                                             .setAction("Action", null).show();
                                 }
                             });
@@ -769,7 +707,7 @@ public class MainActivity extends AppCompatActivity implements BackHandledInterf
                 pageBean.setSelected(false);
             }
             pageBean.setName(harPage.getTitle());
-            pageBean.setCount(proxy.getHar(harPage.getId()).getLog().getEntries().size() + "");
+            pageBean.setCount(proxy.getHar(harPage.getId()).getLog().getHLSGEntries().size() + "");
             pageBeenList.add(pageBean);
         }
 
@@ -901,13 +839,6 @@ public class MainActivity extends AppCompatActivity implements BackHandledInterf
             }
         });
 
-        uploadFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showFilter(MainActivity.this, TYPE_UPLOAD);
-                fam.close(true);
-            }
-        });
 
         previewFab.setOnClickListener(new View.OnClickListener() {
             @Override
